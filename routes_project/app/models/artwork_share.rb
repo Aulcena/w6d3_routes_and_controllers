@@ -10,12 +10,15 @@
 #
 class ArtworkShare < ApplicationRecord
 
+    validates :viewer_id, :artwork_id, presence: true, uniqueness: true
+
+
     belongs_to :artwork,
-    class_name: :Artwork
+    class_name: :Artwork,
+    inverse_of: :artwork_shares
 
     belongs_to :viewer,
-    class_name: :User
-
-    
+    class_name: :User,
+    inverse_of: :artist
 
 end
