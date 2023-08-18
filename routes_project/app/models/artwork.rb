@@ -29,6 +29,12 @@ class Artwork < ApplicationRecord
     through: :artwork_shares,
     source: :viewer
 
+    has_many :comments,
+    foreign_key: :artwork_id,
+    class_name: :Comment,
+    inverse_of: :artwork,
+    dependent: :destroy
+
     def self.artworks_for_user_id(user_id)
         Artwork
             .left_outer_joins(:artwork_shares)
